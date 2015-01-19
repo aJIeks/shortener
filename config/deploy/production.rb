@@ -1,4 +1,5 @@
 set :stage, :production
+set :rails_env, :staging
 
 server 'de-sr-monitor.alpha.vmp.ru', user: 'deploy', roles: %w{app}
 server 'de-sr-monitor.alpha.vmp.ru', user: 'deploy', roles: %w{db}
