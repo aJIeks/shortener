@@ -10,7 +10,7 @@
 "use strict"
 
 # Declare app level module which depends on filters, and services
-deps = ['oauth', "shortener.controllers", 'shortener.services', "ngRoute", 'ui.bootstrap']
+deps = ['oauth', "shortener.controllers", "ngRoute", 'ui.bootstrap']
 
 app = angular.module("shortener", deps).config ['$routeProvider', '$locationProvider', ($routeProvider, $locationProvider) ->
   $routeProvider.when "/",
