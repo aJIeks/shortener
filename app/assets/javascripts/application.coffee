@@ -12,7 +12,7 @@
 # Declare app level module which depends on filters, and services
 deps = ['oauth', "shortener.controllers", 'shortener.services', "ngRoute", 'ui.bootstrap']
 
-app = angular.module("shortener", deps).config ($routeProvider, $locationProvider) ->
+app = angular.module("shortener", deps).config ['$routeProvider', '$locationProvider', ($routeProvider, $locationProvider) ->
   $routeProvider.when "/",
     templateUrl: "/links/index.html"
     controller: "WelcomeCtrl"
@@ -20,3 +20,4 @@ app = angular.module("shortener", deps).config ($routeProvider, $locationProvide
   $routeProvider.otherwise redirectTo: "/"
 
   $locationProvider.html5Mode(true).hashPrefix('!')
+]

@@ -12,7 +12,7 @@ set :deploy_via, :remote_cache
 # set :log_level, :debug
 # set :pty, true
 
-set :linked_files, %w{config/database.yml}
+set :linked_files, %w{config/database.yml config/secrets.yml}
 set :linked_dirs, %w{bin log tmp vendor/bundle public/assets public/uploads}
 
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
