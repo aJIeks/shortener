@@ -1,0 +1,34 @@
+.container
+  %nav.navbar
+    %ul.nav.navbar-nav.navbar-right
+      %li.navbar-text
+        %oauth(site="http://auth.vmp.ru"
+          client-id="70563463190a0783c987c24996ba7f1df6debc639a6885005d5223611c0a3565"
+          redirect-uri=root_url
+          text="Войти"
+          profile-uri="http://auth.vmp.ru/profile/me.json"
+          scope="public" template="/oauth/default.html")
+
+#shortener
+  %div(ng-class='[panel_class]')
+    .row
+      .col-md-12
+        .row
+          .col-md-12
+            %form( ng-submit='send()' ng-class='[form_class]' )
+              .input-group
+                %strong.input-group-addon.vmp-background(ng-show='logged')
+                  http://vmp.su/
+                %input.form-control.key( type='text' ng-model='key' chat-textarea placeholder='короткое имя' ng-show='logged' )
+                %input.form-control.url( type='text' ng-model='url' chat-textarea placeholder='Сократить ссылку' )
+                .input-group-btn
+                  %button.btn.btn-anim(type='submit' ) Сократить
+            %alert(ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)") {{alert.msg}}
+.container
+  .row
+    .col-md-12
+      .well.well-sm.link(ng-repeat="link in links")
+        %input.form-control(href="{{link.url}}" target='_blank' value="{{link.url}}" )
+        = evil_icon 'ei-chevron-right', size: 's'
+        %a(href="{{link.long_url}}" target='_blank') {{link.long_url}}
+        .clearfix

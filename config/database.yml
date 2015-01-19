@@ -1,0 +1,24 @@
+default: &default
+  adapter: postgresql
+  encoding: utf8
+  host: localhost
+  port: 5433
+  # For details on connection pooling, see rails configuration guide
+  # http://guides.rubyonrails.org/configuring.html#database-pooling
+  pool: 5
+
+development:
+  <<: *default
+  username: ooc
+  password: ooc
+  database: vmp-shortener_development
+
+test:
+  <<: *default
+  database: vmp-shortener_test
+
+production:
+  <<: *default
+  database: vmp-shortener_production
+  username: ooc
+  password: <%= ENV['VMP-SHORTENER_DATABASE_PASSWORD'] %>

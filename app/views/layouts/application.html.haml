@@ -1,0 +1,19 @@
+!!!
+%html
+  %head
+    %title Сократить ссылку
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+
+  %body(ng-app="shortener")
+    = evil_icons_sprite
+    %script(type="text/ng-template" id="/oauth/default.html")
+      %span.oauth
+        %a.logged-out(href="#" ng-show="show=='logged-out'" ng-click="login()") {{text}}
+        %a.logged-in(href="#" ng-show="show=='logged-in'" ng-click="logout()") Выйти {{profile.email}}
+        %a.denied(href="#" ng-show="show=='denied'" ng-click="login()") Доступ запрещен. Попробуйте снова.
+    %script(type="text/ng-template" id="/links/index.html")
+      = render file: 'links/index.html'
+    .ng-view
+      = yield
