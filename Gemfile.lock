@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/fuCtor/rails.git
-  revision: 49bd99eafe93ebd5030fea0d6ca552af8f318e2b
+  revision: 5a30ee33faf9674c208c01681d22d02f3e08631c
   specs:
     capistrano-rails (1.1.1)
       capistrano (~> 3.1)
