@@ -6,7 +6,12 @@ class LinksController < ApplicationController
   # GET /links
   # GET /links.json
   def index
-    @links = Link.all
+    if params.key?(:my)
+      require_oauth!
+      @links = Link.where(user: profile['uid'])
+    else
+      @links = Link.all
+    end
   end
 
   def angular
@@ -39,6 +44,7 @@ class LinksController < ApplicationController
     require_oauth! unless link_params[:url].to_s.match(/(?:.*)?\.?vmp\.(?:ru|az|io)\/?/)
 
     @link = Link.new(link_params)
+    @link.user = profile['uid'] if profile
 
     render_link
   rescue ActionController::ParameterMissing
@@ -78,7 +84,7 @@ class LinksController < ApplicationController
 
     def set_link
       id = params[:id]
-      if is.to_i > 0
+      if id.to_i > 0
         @link = Link.find(id)
       else
         @link = Link.find_by_key(id)

@@ -3,6 +3,7 @@ Rails.application.routes.draw do
     scope path: 'v1' do
       scope path: 'links' do
         get '/' => 'links#index'
+        get '/:id' => 'links#show', as: :link
         get '/shorten' => 'links#shorten'
         post '/' => 'links#create'
       end

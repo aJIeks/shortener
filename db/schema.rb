@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150114112925) do
+ActiveRecord::Schema.define(version: 20150402101941) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,10 +23,12 @@ ActiveRecord::Schema.define(version: 20150114112925) do
     t.string   "digest",       default: ""
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user"
   end
 
   add_index "links", ["digest"], name: "index_links_on_digest", unique: true, using: :btree
   add_index "links", ["key"], name: "index_links_on_key", unique: true, using: :btree
+  add_index "links", ["user"], name: "index_links_on_user", using: :btree
 
   create_table "visits", force: true do |t|
     t.integer  "link_id"

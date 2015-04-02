@@ -17,10 +17,24 @@
 
             $scope.$watch('logged', function(new_value){
                 $scope.form_class = new_value ? 'has-key' : ''
+
+                if(new_value)
+                {
+                    $http.get('/api/v1/links?my&token=' + AccessToken.token.access_token).success(function(data, status, headers, config){
+                        for(i = 0; i < data.length; i++)
+                        {
+                            $http.get(data[i].url).success(function(data){
+                                $scope.links.push(data)
+                                $scope.panel_class = 'container'
+                            })
+                        }
+                    })
+                }
             })
 
             $scope.$on('oauth:login', function(event, token) {
                 $scope.logged = true
+
             });
 
             $scope.$on('oauth:logout', function(event) {

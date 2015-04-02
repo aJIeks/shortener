@@ -13,11 +13,15 @@ module Authentificator
         token = OAuth2::AccessToken.from_hash client, { mode: :header, access_token: params[:token] }
     end
 
-    profile = token.get('/profile/me').parsed
+    @profile = token.get('/profile/me').parsed
 
-    @authorized = !(profile['roles'] & ['admin', 'shortener']).empty?
+    @authorized = !(@profile['roles'] & ['admin', 'shortener']).empty?
   rescue
     @authorized = false
+  end
+
+  def profile
+    @profile
   end
 
   def require_oauth!
