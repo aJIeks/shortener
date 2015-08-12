@@ -62,7 +62,7 @@ class LinksController < ApplicationController
 
     return render text: '', status: :not_found unless @link
     @link.track env
-    redirect_to @link.url, status: :permanent_redirect
+    redirect_to @link.url, status: :moved_permanently
   end
 
   private
