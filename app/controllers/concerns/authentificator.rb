@@ -4,7 +4,7 @@ module Authentificator
   def require_oauth
     return @authorized if defined? @authorized
 
-    client = OAuth2::Client.new('client_id', 'client_secret', :site => 'http://auth.vmp.ru')
+    client = OAuth2::Client.new('client_id', 'client_secret', :site => 'https://auth.vmp.ru')
     token = nil
     case params[:token]
       when Hash
@@ -12,6 +12,10 @@ module Authentificator
       when String
         token = OAuth2::AccessToken.from_hash client, { mode: :header, access_token: params[:token] }
     end
+
+    token_info = token.get('/oauth/token/info').parsed
+
+    return @authorized = true if [*Rails.application.secrets.client_whitelist].include?(token_info['application']['uid']) && token_info['resource_owner_id'].nil?
 
     @profile = token.get('/profile/me').parsed
 
